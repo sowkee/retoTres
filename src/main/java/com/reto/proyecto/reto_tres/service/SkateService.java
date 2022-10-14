@@ -37,18 +37,42 @@ public class SkateService {
     
     public Skate update(Skate skate){
         if(skate.getId()!=null){
-            Optional<Skate>g= skateRepository.getSkate(skate.getId());
+            
+            Optional<Skate> g = skateRepository.getSkate(skate.getId());
+            
             if(!g.isEmpty()){
+                
+                if(skate.getName()!=null){
+                    g.get().setName(skate.getName());
+                }                              
+                
+                if(skate.getYear()!=null){
+                    g.get().setYear(skate.getYear());
+                }
+                
+                if(skate.getBrand()!=null){
+                    g.get().setBrand(skate.getBrand());
+                }
+                                              
                 if(skate.getDescription()!=null){                    
                     g.get().setDescription(skate.getDescription());
                 }
-                if(skate.getName()!=null){
-                    g.get().setName(skate.getName());
+                
+                if(skate.getCategory()!=null){                    
+                    g.get().setCategory(skate.getCategory());
                 }
-                return skateRepository.save(g.get());
+                
+                skateRepository.save(g.get());
+                return g.get();
+                //return skateRepository.save(g.get());
+            }else {
+                return skate;
             }
+            
+        }else {
+            return skate;
         }
-        return skate;
+           
     }
     
     public boolean delete(int id) {

@@ -34,6 +34,32 @@ public class SkateService {
             }
         }
     }
+    
+    public Skate update(Skate skate){
+        if(skate.getId()!=null){
+            Optional<Skate>g= skateRepository.getSkate(skate.getId());
+            if(!g.isEmpty()){
+                if(skate.getDescription()!=null){                    
+                    g.get().setDescription(skate.getDescription());
+                }
+                if(skate.getName()!=null){
+                    g.get().setName(skate.getName());
+                }
+                return skateRepository.save(g.get());
+            }
+        }
+        return skate;
+    }
+    
+    public boolean delete(int id) {
+        boolean flag=false;
+        Optional<Skate> c= skateRepository.getSkate(id);
+        if(c.isPresent()){
+            skateRepository.delete(c.get());
+            flag=true;
+        }
+        return flag;
+    }
 
       
 

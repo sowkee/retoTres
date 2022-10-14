@@ -1,4 +1,4 @@
-/*package com.reto.proyecto.reto_tres.entities;
+package com.reto.proyecto.reto_tres.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
@@ -7,32 +7,56 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "costume")
+@Table(name = "score")
 public class Score implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idScore;
+    private String messageText;
+    private String stars;
+    
+    @OneToOne
+    @JsonIgnoreProperties
+    private Reservation reservation;
 
-    @Column(length = 45)
-    private String name;
+    public Integer getIdScore() {
+        return idScore;
+    }
 
-    @Column(length = 45)
-    private String brand;
+    public void setIdScore(Integer idScore) {
+        this.idScore = idScore;
+    }
 
-    @Column(length = 250)
-    private String description;
+    public String getMessageText() {
+        return messageText;
+    }
 
-    @Column(name = "year")
-    private Integer anio;
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
+    }
 
-    @ManyToOne
-    @JoinColumn(name="categoryId")
-    @JsonIgnoreProperties("costumes")
-    private Category category;
+    public String getStars() {
+        return stars;
+    }
+
+    public void setStars(String stars) {
+        this.stars = stars;
+    }
+
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
+
+    
+
+    
 
     
 
     
 }
-*/

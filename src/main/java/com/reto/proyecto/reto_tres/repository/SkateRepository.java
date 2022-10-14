@@ -25,5 +25,10 @@ public class SkateRepository {
         return skateCrudRepository.findById(id);
     }
     
+    public void delete(Skate skate){
+        skateCrudRepository.delete(skate);
+    }
+
+    
     
 }

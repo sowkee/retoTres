@@ -2,6 +2,8 @@ package com.reto.proyecto.reto_tres.controller;
 
 
 
+import com.reto.proyecto.reto_tres.entities.DTOs.CountClient;
+import com.reto.proyecto.reto_tres.entities.DTOs.CountStatus;
 import com.reto.proyecto.reto_tres.entities.Reservation;
 import com.reto.proyecto.reto_tres.service.ReservationService;
 import java.util.List;
@@ -39,5 +41,21 @@ public class ReservationController {
     public Reservation save(@RequestBody Reservation reservation){
         return reservationService.save(reservation);
     }
- 
+    
+    @GetMapping("/report-clients")
+    public List<CountClient> getReportTopClients(){
+        return reservationService.getTopClients();
+    }
+    
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+    public List<Reservation> getReportReservationClient(@PathVariable("dateOne") String dateOne, @PathVariable("dateTwo") String dateTwo) {
+        return reservationService.getReservationPeriod(dateOne, dateTwo);
+    }
+    
+    @GetMapping("/report-status")
+    public CountStatus getReportStatusReservation(){
+        return reservationService.getReservationStatus();
+    }
+    
+    
 }
